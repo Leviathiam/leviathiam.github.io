@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit Generator — Word Gets Around (Internal)</title>
+<style>
+  :root{--navy:#10243e;--navy2:#0b1a2e;--amber:#f2a81d;--amber-d:#d18f0e;--ink:#1c2733;--muted:#5a6a7a;--line:#dde5ec;--soft:#f4f7fa;--red:#b3372c;--green:#1e7d43}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.55;font-size:16px;background:var(--soft)}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 60px}
+  h1{color:var(--navy);font-size:1.5rem}
+  .note{color:var(--muted);font-size:.9rem;margin:6px 0 22px}
+  form{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:620px){.row{grid-template-columns:1fr}}
+  label{display:block;font-weight:700;color:var(--navy);font-size:.9rem;margin:12px 0 5px}
+  input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;font-size:1rem;background:#fff}
+  button{margin-top:22px;background:var(--amber);color:var(--navy2);font-weight:800;border:none;padding:13px 26px;border-radius:999px;font-size:1rem;cursor:pointer}
+  button:hover{background:var(--amber-d);color:#fff}
+  .ghost{background:#fff;border:2px solid var(--navy);color:var(--navy);margin-left:10px}
+  /* report */
+  #report{display:none;background:#fff;border:1px solid var(--line);border-radius:14px;padding:34px;margin-top:26px}
+  #report .brand{font-weight:800;color:var(--navy);font-size:1.05rem}
+  #report .brand span{color:var(--amber-d)}
+  #report h2{color:var(--navy);font-size:1.7rem;line-height:1.25;margin:14px 0 4px}
+  #report .sub{color:var(--muted);margin-bottom:20px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+  .stat{border:1px solid var(--line);border-radius:11px;padding:14px;text-align:center}
+  .stat .big{font-size:1.6rem;font-weight:800;color:var(--navy)}
+  .stat .lbl{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .verdict{border-left:5px solid var(--amber);background:var(--soft);padding:16px 18px;border-radius:0 11px 11px 0;margin:18px 0;font-size:1.02rem}
+  #report h3{color:var(--navy);margin:22px 0 8px;font-size:1.12rem}
+  #report ul{margin-left:20px;color:var(--ink)}
+  #report li{margin:5px 0}
+  .offer{border:2px solid var(--navy);border-radius:13px;padding:20px;margin-top:26px;text-align:center}
+  .offer .price{font-size:1.9rem;font-weight:800;color:var(--navy)}
+  .offer p{color:var(--muted);font-size:.93rem}
+  .foot{color:var(--muted);font-size:.85rem;margin-top:22px;text-align:center}
+  .bad{color:var(--red);font-weight:700}.good{color:var(--green);font-weight:700}
+  @media print{
+    form,button,.note{display:none!important}
+    body{background:#fff}
+    #report{display:block!important;border:none;padding:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Free Google Page Audit — Generator</h1>
+  <p class="note">Internal tool for Word Gets Around. Every number is typed in by hand from the prospect's real Google listing — nothing is fetched and nothing is invented. Fill it in, generate, print or screenshot the audit.</p>
+
+  <form id="f">
+    <div class="row">
+      <div><label>Business name</label><input id="biz" placeholder="Locke Plumbing Company" required></div>
+      <div><label>City &amp; state</label><input id="city" placeholder="Knoxville, TN" required></div>
+    </div>
+    <div class="row">
+      <div><label>Trade</label>
+        <select id="trade"><option>Plumbing</option><option>HVAC</option><option>Electrical</option><option>Roofing</option><option>Other home service</option></select></div>
+      <div><label>Years in business (if known)</label><input id="years" type="number" min="0" placeholder="e.g. 83"></div>
+    </div>
+    <div class="row">
+      <div><label>Google rating (stars)</label><input id="rating" type="number" step="0.1" min="0" max="5" placeholder="e.g. 5.0"></div>
+      <div><label>Total Google reviews</label><input id="count" type="number" min="0" placeholder="e.g. 3"></div>
+    </div>
+    <div class="row">
+      <div><label>Reviews with an owner reply</label><input id="answered" type="number" min="0" placeholder="count them on the listing"></div>
+      <div><label>Most recent review</label>
+        <select id="recency"><option value="">— pick one —</option><option>Within the last month</option><option>1–6 months ago</option><option>6–12 months ago</option><option>Over a year ago</option><option>No reviews yet</option></select></div>
+    </div>
+    <div class="row">
+      <div><label>Main local competitor (name)</label><input id="comp" placeholder="e.g. HEP Services"></div>
+      <div><label>Competitor's review count</label><input id="compcount" type="number" min="0" placeholder="e.g. 2000"></div>
+    </div>
+    <div class="row">
+      <div><label>Has a website linked?</label>
+        <select id="website"><option value="">— pick one —</option><option>Yes</option><option>No</option></select></div>
+      <div><label>Posts/updates on the profile?</label>
+        <select id="posts"><option value="">— pick one —</option><option>Yes, recent</option><option>Yes, but old</option><option>None seen</option></select></div>
+    </div>
+    <button type="submit">Generate Audit</button>
+  </form>
+
+  <div id="report">
+    <div class="brand">Word Gets <span>Around</span> — Free Google Page Audit</div>
+    <h2 id="r-title"></h2>
+    <p class="sub" id="r-sub"></p>
+    <div class="stats">
+      <div class="stat"><div class="big" id="r-rating">—</div><div class="lbl">Google rating</div></div>
+      <div class="stat"><div class="big" id="r-count">—</div><div class="lbl">Total reviews</div></div>
+      <div class="stat"><div class="big" id="r-resp">—</div><div class="lbl">Reviews answered</div></div>
+      <div class="stat"><div class="big" id="r-gap">—</div><div class="lbl">Reviews behind rival</div></div>
+    </div>
+    <div class="verdict" id="r-verdict"></div>
+    <h3>What we found</h3>
+    <ul id="r-found"></ul>
+    <h3>What we'd fix first</h3>
+    <ul id="r-fix"></ul>
+    <div class="offer">
+      <div class="price">$199/mo</div>
+      <p>Word Gets Around sets up the asking system that turns your happy customers into reviews like these, answers every review, and posts 8 times a month to your Google and Facebook pages. First 3 shops only at this price (regular $299/mo). No contract, cancel anytime, and we never fake a review.</p>
+      <p style="margin-top:8px"><b>wordgetsaroundreviews@gmail.com</b></p>
+    </div>
+    <p class="foot">Prepared by Word Gets Around from this business's public Google listing. Figures shown are the listing's own numbers at the time of the audit.</p>
+    <button class="ghost" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+</div>
+
+<script>
+document.getElementById('f').addEventListener('submit', function(e){
+  e.preventDefault();
+  var v = function(id){ return document.getElementById(id).value.trim(); };
+  var biz = v('biz'), city = v('city'), trade = v('trade');
+  var rating = parseFloat(v('rating')), count = parseInt(v('count')||'0',10);
+  var answered = v('answered')==='' ? null : parseInt(v('answered'),10);
+  var comp = v('comp'), compcount = parseInt(v('compcount')||'0',10);
+  var recency = v('recency'), website = v('website'), posts = v('posts'), years = v('years');
+
+  document.getElementById('r-title').textContent = biz;
+  document.getElementById('r-sub').textContent = trade + ' · ' + city + (years ? ' · In business ' + years + ' years' : '');
+  document.getElementById('r-rating').textContent = isNaN(rating) ? 'None yet' : rating.toFixed(1) + ' ★';
+  document.getElementById('r-count').textContent = count;
+  var respTxt = '—', respRate = null;
+  if(answered !== null && count > 0){ respRate = Math.round(answered/count*100); respTxt = respRate + '%'; }
+  if(answered !== null && count === 0){ respTxt = '—'; }
+  document.getElementById('r-resp').textContent = respTxt;
+  var gap = (comp && compcount > count) ? (compcount - count) : 0;
+  document.getElementById('r-gap').textContent = comp ? gap.toLocaleString() : '—';
+
+  var found = [], fix = [], verdict = '';
+
+  if(count === 0){
+    verdict = biz + ' has no Google reviews at all. Every homeowner who searches finds a blank page — and calls the next shop. The good news: starting from zero means the first ten happy customers can change this page completely, fast.';
+    found.push('No reviews on the Google listing — nothing for a customer to judge the shop by.');
+    fix.push('Stand up a simple ask system (text + card after each job) so every happy customer gets asked while the good work is fresh.');
+  } else if(!isNaN(rating) && rating >= 4.5 && count < 25){
+    verdict = 'Here\'s the story in one line: ' + biz + ' does work customers rate ' + rating.toFixed(1) + ' stars — and almost nobody knows it, because only ' + count + ' customers ever said so on Google. The quality is proven. The visibility isn\'t. That\'s the cheapest kind of problem in business to fix.';
+    found.push('A ' + rating.toFixed(1) + '-star rating on just ' + count + ' reviews — excellent work, barely documented.');
+    fix.push('Ask every happy customer, every time, with a system — not memory. At this rating, volume is the whole game.');
+  } else if(!isNaN(rating) && rating < 4.0){
+    verdict = biz + ' is sitting at ' + rating.toFixed(1) + ' stars on ' + count + ' reviews. A rating under 4 quietly filters the shop out of most homeowners\' shortlists. The fix isn\'t tricks — it\'s a steady flow of real reviews from the many happy customers who never get asked.';
+    found.push('Rating of ' + rating.toFixed(1) + ' stars — below the line most customers use to shortlist a shop.');
+    fix.push('Increase real review volume so the full picture of the shop\'s work shows, and answer every review to rebuild trust publicly.');
+  } else {
+    verdict = biz + ' has a workable Google page — ' + (isNaN(rating)?'':rating.toFixed(1)+' stars, ') + count + ' reviews — but workable isn\'t winning. The gaps below are where calls are leaking to competitors.';
+    found.push(count + ' reviews at ' + (isNaN(rating)?'—':rating.toFixed(1)) + ' stars — a foundation, not a lead machine.');
+  }
+
+  if(respRate !== null && count > 0){
+    if(respRate < 100){ found.push('Only ' + answered + ' of ' + count + ' reviews have an owner reply — unanswered reviews tell the next customer the shop stopped paying attention.'); fix.push('Answer every review, past ones included. Replies are public proof the shop stands behind its work.'); }
+    else { found.push('Every review has an owner reply — rare, and it shows. <span class="good">Keep it up.</span>'); }
+  }
+  if(comp && gap > 0){
+    found.push((compcount >= 1000 ? compcount.toLocaleString() : compcount) + ' reviews for ' + comp + ' — ' + gap.toLocaleString() + ' more than ' + biz + '. When a homeowner compares the two pages side by side, that gap does the talking.');
+    if(count < 25) fix.push('Close the credibility gap: a consistent ask system can add more reviews in a season than the shop has collected in years.');
+  }
+  if(recency){ found.push('Most recent review: ' + recency.toLowerCase() + (recency.indexOf('Over a year')===0 || recency==='No reviews yet' ? ' — a stale page reads as a closed shop.' : '.')); if(recency.indexOf('Over a year')===0) fix.push('Restart the review clock — fresh reviews are a ranking signal and a trust signal at once.'); }
+  if(website === 'No'){ found.push('No website linked from the Google profile — one less reason for Google and customers to trust the listing.'); }
+  if(posts && posts !== 'Yes, recent'){ found.push('No recent posts or updates on the profile — active pages rank and convert better than silent ones.'); fix.push('Post twice a week (job photos, tips, seasonal reminders) so the page always looks open for business.'); }
+  if(years && parseInt(years,10) >= 25 && count < 50){ found.push('In business ' + years + ' years with only ' + count + ' Google reviews — decades of happy customers who were simply never asked. That backlog is this shop\'s biggest untapped asset.'); }
+
+  if(fix.length === 0) fix.push('Keep the system running: steady asks, every review answered, regular posts.');
+  fix = fix.slice(0,3);
+
+  document.getElementById('r-verdict').innerHTML = verdict;
+  document.getElementById('r-found').innerHTML = found.map(function(x){return '<li>'+x+'</li>';}).join('');
+  document.getElementById('r-fix').innerHTML = fix.map(function(x){return '<li>'+x+'</li>';}).join('');
+  var r = document.getElementById('report');
+  r.style.display = 'block';
+  r.scrollIntoView({behavior:'smooth'});
+});
+</script>
+</body>
+</html>

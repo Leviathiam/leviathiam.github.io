@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Gets Around — More Reviews. More Calls. | Review &amp; Posting Service for Home Service Shops</title>
+<meta name="description" content="Word Gets Around helps single-location home service businesses turn happy customers into real Google reviews. Done-for-you review asks, replies, and posts. $199/mo, no contract.">
+<style>
+  :root{
+    --navy:#10243e; --navy2:#0b1a2e; --amber:#f2a81d; --amber-d:#d18f0e;
+    --ink:#1c2733; --muted:#5a6a7a; --bg:#ffffff; --bg-soft:#f4f7fa; --line:#dde5ec;
+    --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:17px}
+  a{color:var(--navy)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  /* header */
+  header{position:sticky;top:0;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);z-index:10}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .brand{font-weight:800;font-size:1.25rem;color:var(--navy);letter-spacing:.2px;text-decoration:none}
+  .brand span{color:var(--amber-d)}
+  .nav-cta{background:var(--amber);color:var(--navy2);font-weight:700;padding:10px 18px;border-radius:999px;text-decoration:none;font-size:.95rem}
+  .nav-cta:hover{background:var(--amber-d);color:#fff}
+  /* hero */
+  .hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:72px 0 64px}
+  .hero h1{font-size:2.5rem;line-height:1.15;font-weight:800;max-width:720px}
+  .hero h1 em{font-style:normal;color:var(--amber)}
+  .hero p{margin:20px 0 30px;font-size:1.15rem;color:#cfdce9;max-width:640px}
+  .btnrow{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:14px 26px;border-radius:999px;font-weight:700;text-decoration:none;font-size:1rem}
+  .btn-amber{background:var(--amber);color:var(--navy2)}
+  .btn-amber:hover{background:var(--amber-d);color:#fff}
+  .btn-ghost{border:2px solid #47617f;color:#fff}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+  .trust{display:flex;gap:10px 28px;flex-wrap:wrap;margin-top:38px;color:#9fb4c9;font-size:.92rem}
+  .trust b{color:#fff}
+  /* sections */
+  section{padding:64px 0}
+  .soft{background:var(--bg-soft)}
+  h2{font-size:1.85rem;color:var(--navy);line-height:1.25;margin-bottom:14px}
+  .lede{color:var(--muted);max-width:680px;margin-bottom:36px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .card h3{color:var(--navy);font-size:1.12rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.97rem}
+  .card .icon{font-size:1.5rem;margin-bottom:10px}
+  .steps{counter-reset:step}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .step .n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--amber);color:var(--navy2);font-weight:800;margin-bottom:12px}
+  .step h3{color:var(--navy);font-size:1.1rem;margin-bottom:6px}
+  .step p{color:var(--muted);font-size:.97rem}
+  /* pricing */
+  .price-card{max-width:560px;margin:0 auto;background:#fff;border:2px solid var(--navy);border-radius:18px;padding:36px;text-align:center}
+  .price-card .tag{display:inline-block;background:var(--amber);color:var(--navy2);font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:16px}
+  .price{font-size:3rem;font-weight:800;color:var(--navy);line-height:1}
+  .price small{font-size:1.05rem;color:var(--muted);font-weight:600}
+  .price-card ul{list-style:none;text-align:left;margin:24px auto 28px;max-width:400px}
+  .price-card li{padding:7px 0 7px 30px;position:relative;color:var(--ink)}
+  .price-card li::before{content:"✓";position:absolute;left:4px;color:var(--amber-d);font-weight:800}
+  .fineprint{color:var(--muted);font-size:.88rem;margin-top:14px}
+  /* faq */
+  details{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;margin-bottom:12px}
+  summary{font-weight:700;color:var(--navy);cursor:pointer}
+  details p{color:var(--muted);margin-top:8px;font-size:.97rem}
+  /* cta band */
+  .cta-band{background:var(--navy);color:#fff;text-align:center;padding:64px 0}
+  .cta-band h2{color:#fff}
+  .cta-band p{color:#cfdce9;max-width:560px;margin:0 auto 28px}
+  /* footer */
+  footer{background:var(--navy2);color:#8ea4bb;padding:34px 0;font-size:.92rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer a{color:#cfdce9}
+  @media (max-width:640px){ .hero h1{font-size:1.95rem} section{padding:48px 0} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">Word Gets <span>Around</span></a>
+    <a class="nav-cta" href="#audit">Get a Free Audit</a>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <h1>Your happy customers are your best advertising. <em>We make sure Google hears them.</em></h1>
+    <p>Word Gets Around is a done-for-you review service for single-location home service shops — plumbers, HVAC, electricians, roofers. We get your actual customers to say what they already think, reply to every review, and keep your Google and Facebook pages working as hard as you do.</p>
+    <div class="btnrow">
+      <a class="btn btn-amber" href="#audit">Get Your Free Google Page Audit</a>
+      <a class="btn btn-ghost" href="#how">See How It Works</a>
+    </div>
+    <div class="trust">
+      <div><b>No contracts</b> — cancel anytime</div>
+      <div><b>No passwords</b> — you never share yours</div>
+      <div><b>No fake reviews</b> — ever</div>
+      <div><b>Built for</b> single-location shops</div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Great work. Invisible Google page.</h2>
+    <p class="lede">Most shops we talk to do excellent work — and their Google page says almost nothing about it. A handful of old reviews, some never answered, and the shop down the road with worse work and 300 reviews gets the call. Homeowners pick from Google. If your page is quiet, you're paying for that silence every week.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">⭐</div>
+        <h3>Customers don't review on their own</h3>
+        <p>Happy customers mean to leave a review and forget by dinner. The shops with hundreds of reviews don't have happier customers — they have a system that asks, at the right moment, the right way.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💬</div>
+        <h3>Unanswered reviews cost you calls</h3>
+        <p>A review with no reply — good or bad — tells the next customer you stopped paying attention. Every review deserves an answer, and most owners simply don't have the hour it takes each week.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📉</div>
+        <h3>A silent page sinks in search</h3>
+        <p>Google rewards pages that stay active: fresh reviews, fresh posts, accurate info. A page that hasn't moved in months quietly slides down the list — and somebody else's phone rings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <h2>What you get, every month</h2>
+    <p class="lede">One flat price. No setup circus, no logging into anything new, no homework for your office.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>The Ask System</h3>
+        <p>A simple, repeatable way to ask every happy customer for a review — text and card based, set up for your shop, timed to right after the job when they're happiest.</p>
+      </div>
+      <div class="card">
+        <h3>Every Review Answered</h3>
+        <p>We reply to every Google and Facebook review in your voice — thank-yous for the good ones, calm and professional for the rough ones. You approve the tone; we do the typing.</p>
+      </div>
+      <div class="card">
+        <h3>8 Posts a Month</h3>
+        <p>Job photos, tips, seasonal reminders — posted to your Google profile and Facebook page so your pages always look open for business.</p>
+      </div>
+      <div class="card">
+        <h3>Weekly Profile Check</h3>
+        <p>Hours, phone, services, photos — we check your Google profile every week and fix anything that's drifted or broken before it costs you a call.</p>
+      </div>
+      <div class="card">
+        <h3>One-Page Monthly Report</h3>
+        <p>New reviews, your rating, what we posted, what's next. One page, plain English, no dashboards to decode.</p>
+      </div>
+      <div class="card">
+        <h3>Real Reviews Only</h3>
+        <p>We never buy, fake, or filter reviews — Google bans shops for that, and it isn't honest anyway. We get your actual customers to say what they already think.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="lede">Three steps, and only the first one needs a minute of your time.</p>
+    <div class="grid steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Free audit</h3>
+        <p>We look at your Google page the way a customer does and send you a short, honest audit — what's helping, what's hurting, what we'd fix first. Free, no strings.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>We set up the system</h3>
+        <p>You grant us manager access to your Google profile and Facebook page — no passwords change hands, and you can revoke access anytime. We build your ask system and posting rhythm.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Reviews roll in</h3>
+        <p>Your customers start hearing the ask, reviews start showing up answered, and your page starts looking like the shop you actually run. You do the work. We do the typing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <h2>Simple pricing</h2>
+    <p class="lede" style="text-align:center;margin-left:auto;margin-right:auto">We're onboarding our first three shops at $199/month. Regular pricing is $299/mo.</p>
+    <div class="price-card">
+      <div class="tag">First 3 spots</div>
+      <div class="price">$199<small>/month</small></div>
+      <ul>
+        <li>The Ask System, set up for your shop</li>
+        <li>Every Google &amp; Facebook review answered</li>
+        <li>8 posts a month (Google + Facebook)</li>
+        <li>Weekly Google profile check</li>
+        <li>One-page monthly report</li>
+        <li>Price locked for your first 6 months</li>
+      </ul>
+      <a class="btn btn-amber" href="#audit" style="background:var(--navy);color:#fff">Claim Your Spot</a>
+      <p class="fineprint">Cancel anytime. No setup fee. No fake reviews, no review gating, no nonsense.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Straight answers</h2>
+    <p class="lede">The questions every shop owner asks us first.</p>
+    <details>
+      <summary>Do you fake reviews or pay for them?</summary>
+      <p>Never. Bought and faked reviews violate Google's rules, get shops suspended, and fool nobody for long. Our whole service is built on the opposite: a real asking system that turns your genuinely happy customers into real reviews.</p>
+    </details>
+    <details>
+      <summary>Do I have to give you my password?</summary>
+      <p>No. You add us as a manager on your Google Business Profile and Facebook page using your own login. You keep full ownership, and you can remove our access in about a minute, anytime.</p>
+    </details>
+    <details>
+      <summary>What if I get a bad review?</summary>
+      <p>It gets a calm, professional reply — the kind that future customers judge you by, often more than the review itself. And the best defense is volume: a steady stream of real, happy reviews puts one bad day in its proper place.</p>
+    </details>
+    <details>
+      <summary>How much of my time does this take?</summary>
+      <p>Almost none. A short setup call, a photo of finished jobs when you remember to snap one, and five minutes with the monthly report. The asking, replying, posting, and checking are on us.</p>
+    </details>
+    <details>
+      <summary>Is there a contract?</summary>
+      <p>No contract and no setup fee. Your $199 rate is locked for your first six months; after that it moves to the regular rate, and you can cancel anytime before a billing date.</p>
+    </details>
+    <details>
+      <summary>Who is this for — and not for?</summary>
+      <p>It's built for single-location home service businesses: plumbing, HVAC, electrical, roofing, and the like. If you run multiple locations or a franchise, we're probably not your shop — and we'll tell you so on the audit call.</p>
+    </details>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>About</h2>
+    <p class="lede" style="max-width:760px">Word Gets Around is a small, US-based service run by Garry Younker out of Illinois, serving home service shops nationwide. It exists for one reason: the best shops in town are often the worst-marketed, and that's fixable. No agency layers, no account managers reading scripts — the person you talk to is the person running your page.</p>
+  </div>
+</section>
+
+<div class="cta-band" id="audit">
+  <div class="wrap">
+    <h2>Start with the free audit</h2>
+    <p>Send us your business name, your city, and a link to your Google listing. We'll send back a short, honest audit of your page — what a customer sees, what's costing you calls, and what we'd fix first. No cost, no obligation, no sales gauntlet.</p>
+    <div class="btnrow" style="justify-content:center">
+      <a class="btn btn-amber" href="mailto:wordgetsaroundreviews@gmail.com?subject=Free%20Google%20page%20audit%20request&body=Business%20name%3A%0ACity%3A%0AGoogle%20listing%20link%20(if%20you%20have%20it)%3A%0A">Email Us for Your Free Audit</a>
+      <a class="btn btn-ghost" href="https://www.facebook.com/profile.php?id=1399844349879914" target="_blank" rel="noopener">Find Us on Facebook</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Word Gets Around. All rights reserved.</div>
+    <div><a href="mailto:wordgetsaroundreviews@gmail.com">wordgetsaroundreviews@gmail.com</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
