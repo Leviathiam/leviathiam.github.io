@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Google Page Audit — Word Gets Around</title>
+<meta name="description" content="Free 60-second audit: see what customers see on your Google page, and what it's costing you.">
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:640px;margin:0 auto;padding:20px;color:#1a1a1a;line-height:1.5}
+h1{font-size:1.6em;line-height:1.2} h2{font-size:1.2em;margin-top:1.5em}
+label{display:block;margin:12px 0 4px;font-weight:600}
+input,select{width:100%;padding:10px;font-size:1em;border:1px solid #bbb;border-radius:6px;box-sizing:border-box}
+button{background:#0b6e4f;color:#fff;border:0;padding:14px 20px;font-size:1.05em;border-radius:8px;width:100%;margin-top:18px;cursor:pointer}
+button:hover{background:#095c42}
+#result{display:none;margin-top:24px;border-top:2px solid #0b6e4f;padding-top:8px}
+.gap{background:#fdf2f2;border-left:4px solid #c0392b;padding:10px 12px;margin:10px 0}
+.good{background:#f0faf6;border-left:4px solid #0b6e4f;padding:10px 12px;margin:10px 0}
+.offer{background:#111;color:#fff;padding:18px;border-radius:10px;margin-top:24px}
+.offer b{font-size:1.15em}
+.note{color:#555;font-size:.9em}
+</style>
+</head>
+<body>
+<h1>Is your Google page costing you calls?</h1>
+<p>Run a free 60-second audit. Answer what you know — anything you leave blank just gets skipped, nothing gets guessed.</p>
+<form id="auditForm">
+<label>Business name <input id="biz" type="text" placeholder="e.g. Smith Plumbing"></label>
+<label>City and state <input id="city" type="text" placeholder="e.g. Springfield, IL"></label>
+<label>Trade
+<select id="trade">
+<option value="shop">Home-service shop</option>
+<option value="Plumbing">Plumbing</option>
+<option value="HVAC">HVAC</option>
+<option value="Electrical">Electrical</option>
+<option value="Roofing">Roofing</option>
+</select></label>
+<label>Years in business <input id="years" type="number" min="0" placeholder="e.g. 20"></label>
+<label>Google star rating
+<select id="rating">
+<option value="">No rating showing yet</option>
+<option value="5">5.0</option>
+<option value="4.5">4.5</option>
+<option value="4">4.0</option>
+<option value="3.5">3.5 or lower</option>
+</select></label>
+<label>Number of Google reviews <input id="reviews" type="number" min="0" placeholder="e.g. 12"></label>
+<label>Reviews you have replied to <input id="replied" type="number" min="0" placeholder="e.g. 3"></label>
+<label>Your top local competitor's review count <input id="comp" type="number" min="0" placeholder="e.g. 300"></label>
+<label>Do you have a website?
+<select id="site"><option value="">Not sure</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+<label>Any posts on your Google profile in the last month?
+<select id="posts"><option value="">Not sure</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+<button type="submit">Run my free audit</button>
+</form>
+
+<div id="result">
+<h2 id="rHead">Your audit</h2>
+<div id="rBody"></div>
+<div class="offer">
+<b>Want it fixed?</b><br>
+One-time Fix-Up — <b>$99</b>, done in 48 hours: hours, services, photos, description corrected, and your review replies caught up.<br><br>
+Or done-for-you every month — <b>$199/mo, no contract</b>: replies to every review, posts twice a week, profile kept correct.<br><br>
+<a href="mailto:wordgetsaroundreviews@gmail.com?subject=Fix-Up%20request&body=Business%20name%3A%0ACity%3A%0A" style="color:#fff;text-decoration:underline;font-weight:700">Email us your business name and city to start</a> — wordgetsaroundreviews@gmail.com
+</div>
+<p class="note">Word Gets Around — done-for-you Google and Facebook reviews and posts for single-location home-service shops. No fake reviews, ever.</p>
+</div>
+
+<script>
+document.getElementById('auditForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var biz = document.getElementById('biz').value.trim();
+  var city = document.getElementById('city').value.trim();
+  var trade = document.getElementById('trade').value;
+  var years = parseInt(document.getElementById('years').value, 10);
+  var rating = document.getElementById('rating').value;
+  var reviews = parseInt(document.getElementById('reviews').value, 10);
+  var replied = parseInt(document.getElementById('replied').value, 10);
+  var comp = parseInt(document.getElementById('comp').value, 10);
+  var site = document.getElementById('site').value;
+  var posts = document.getElementById('posts').value;
+
+  var who = (biz ? biz : 'Your shop') + (city ? ' (' + city + ')' : '');
+  document.getElementById('rHead').textContent = 'Your audit' + (biz ? ' — ' + biz : '');
+  var gaps = [], goods = [], skipped = [];
+
+  if (rating === '') gaps.push('<b>No star rating showing.</b> A customer comparing two shops picks the one with stars. Until you have a rating, every search is a coin flip.');
+  else if (rating === '3.5') gaps.push('<b>Low rating showing.</b> A rating at 3.5 or below scares off customers before they call. The fix is volume: a steady stream of real reviews from happy customers buries one bad day.');
+  if (isNaN(reviews)) skipped.push('review count');
+  else if (!isNaN(comp) && reviews < comp) gaps.push('<b>Review volume gap.</b> You show ' + reviews + ' reviews and a local competitor shows ' + comp + '. Customers read that as the competitor being the safer pick, even when your work is better.');
+  else if (reviews === 0) gaps.push('<b>Zero reviews showing.</b> Great work with nothing to show for it on Google — customers have no proof to pick you by.');
+  if (isNaN(replied) || isNaN(reviews)) { if (!isNaN(reviews) && isNaN(replied)) skipped.push('replied count'); }
+  else if (reviews > 0 && replied < reviews) gaps.push('<b>' + (reviews - replied) + ' review(s) unanswered.</b> A review with no reply — good or bad — tells the next customer you stopped paying attention.');
+  if (site === 'no') gaps.push('<b>No website.</b> Customers who want to check you out have nowhere to go — and Google has one less reason to trust the listing.');
+  else if (site === '') skipped.push('website');
+  if (posts === 'no') gaps.push('<b>Silent profile.</b> No posts in the last month makes the page look closed or out of business, and Google rewards pages that stay active.');
+  else if (posts === '') skipped.push('recent posts');
+
+  if (!isNaN(years) && years >= 10) goods.push('<b>Established shop.</b> ' + years + ' years in business is real trust — your page just isn\'t showing it yet.');
+  if (rating !== '' && rating !== '3.5' && !isNaN(reviews) && reviews >= 20) goods.push('<b>Reputation to build on.</b> A solid rating with real volume — the foundation is there.');
+  if (gaps.length === 0) goods.push('<b>Nothing broken stood out from what you entered.</b> If calls still feel slow, the gap is usually volume against one specific competitor — check their count and run this again.');
+
+  var html = '<p>' + who + ' — here is what a customer sees, and what it is costing you:</p>';
+  gaps.forEach(function(g){ html += '<div class="gap">' + g + '</div>'; });
+  goods.forEach(function(g){ html += '<div class="good">' + g + '</div>'; });
+  if (gaps.length) {
+    html += '<h2>What to fix first</h2><ol>';
+    gaps.slice(0, 3).forEach(function(g){ html += '<li>' + g.replace(/<[^>]+>/g, '') + '</li>'; });
+    html += '</ol>';
+  }
+  if (skipped.length) html += '<p class="note">Skipped (left blank): ' + skipped.join(', ') + '. Fill those in and run it again for a fuller picture.</p>';
+  document.getElementById('rBody').innerHTML = html;
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('result').scrollIntoView();
+});
+</script>
+</body>
+</html>
