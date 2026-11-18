@@ -51,6 +51,18 @@ button:hover{background:#095c42}
 <select id="site"><option value="">Not sure</option><option value="yes">Yes</option><option value="no">No</option></select></label>
 <label>Any posts on your Google profile in the last month?
 <select id="posts"><option value="">Not sure</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+<h2>AI search — 5 profiles customers (and ChatGPT) check</h2>
+<p class="note">Google isn't the only place customers look. AI search — ChatGPT and the rest — pulls local business info from these five profiles. For each one, is it claimed in your business's name?</p>
+<label>Bing Places for Business
+<select id="p-bing"><option value="">Don't know</option><option value="yes">Claimed</option><option value="no">Not claimed</option></select></label>
+<label>Better Business Bureau (BBB)
+<select id="p-bbb"><option value="">Don't know</option><option value="yes">Claimed</option><option value="no">Not claimed</option></select></label>
+<label>Yelp
+<select id="p-yelp"><option value="">Don't know</option><option value="yes">Claimed</option><option value="no">Not claimed</option></select></label>
+<label>Apple Maps
+<select id="p-apple"><option value="">Don't know</option><option value="yes">Claimed</option><option value="no">Not claimed</option></select></label>
+<label>Nextdoor
+<select id="p-nextdoor"><option value="">Don't know</option><option value="yes">Claimed</option><option value="no">Not claimed</option></select></label>
 <button type="submit">Run my free audit</button>
 </form>
 
@@ -59,7 +71,7 @@ button:hover{background:#095c42}
 <div id="rBody"></div>
 <div class="offer">
 <b>Want it fixed?</b><br>
-One-time Fix-Up — <b>$99</b>: hours, services, photos, description corrected, and your review replies caught up.<br><br>
+One-time Fix-Up — <b>$99</b>: hours, services, photos, description corrected, your review replies caught up, and your five AI-search profiles claimed (Bing Places, Better Business Bureau, Yelp, Apple Maps, Nextdoor) so customers who ask ChatGPT can find you.<br><br>
 Or done-for-you every month — <b>$199/mo, no contract</b>: replies to every review, posts twice a week, Google and Facebook profiles kept correct.<br><br>
 <a href="mailto:wordgetsaroundreviews@gmail.com?subject=Fix-Up%20request&body=Business%20name%3A%0ACity%3A%0A" style="color:#fff;text-decoration:underline;font-weight:700">Email us your business name and city to start</a> — wordgetsaroundreviews@gmail.com<br>Or call or text <a href="tel:+12173314562" style="color:#fff;text-decoration:underline;font-weight:700">217-331-4562</a>.
 </div>
@@ -79,10 +91,27 @@ document.getElementById('auditForm').addEventListener('submit', function(e){
   var comp = parseInt(document.getElementById('comp').value, 10);
   var site = document.getElementById('site').value;
   var posts = document.getElementById('posts').value;
+  var profiles = [
+    ['p-bing', 'Bing Places'],
+    ['p-bbb', 'Better Business Bureau'],
+    ['p-yelp', 'Yelp'],
+    ['p-apple', 'Apple Maps'],
+    ['p-nextdoor', 'Nextdoor']
+  ];
+  var unclaimed = [], claimedCount = 0, answeredCount = 0;
+  profiles.forEach(function(p){
+    var v = document.getElementById(p[0]).value;
+    if (v === 'no') unclaimed.push(p[1]);
+    else if (v === 'yes') claimedCount++;
+  });
+  answeredCount = claimedCount + unclaimed.length;
 
   var who = (biz ? biz : 'Your shop') + (city ? ' (' + city + ')' : '');
   document.getElementById('rHead').textContent = 'Your audit' + (biz ? ' — ' + biz : '');
   var gaps = [], goods = [], skipped = [];
+  profiles.forEach(function(p){
+    if (document.getElementById(p[0]).value === '') skipped.push(p[1] + ' profile');
+  });
 
   if (rating === '') gaps.push('<b>No star rating showing.</b> A customer comparing two shops picks the one with stars. Until you have a rating, every search is a coin flip.');
   else if (rating === '3.5') gaps.push('<b>Low rating showing.</b> A rating at 3.5 or below scares off customers before they call. The fix is volume: a steady stream of real reviews from happy customers buries one bad day.');
@@ -95,6 +124,9 @@ document.getElementById('auditForm').addEventListener('submit', function(e){
   else if (site === '') skipped.push('website');
   if (posts === 'no') gaps.push('<b>Silent profile.</b> No posts in the last month makes the page look closed or out of business, and Google rewards pages that stay active.');
   else if (posts === '') skipped.push('recent posts');
+  if (unclaimed.length === 5) gaps.push('<b>Invisible to AI search.</b> None of your five AI-search profiles are claimed — Bing Places, Better Business Bureau, Yelp, Apple Maps, Nextdoor. When someone asks ChatGPT for a shop like yours, it has nothing to find.');
+  else if (unclaimed.length > 0) gaps.push('<b>' + unclaimed.length + ' AI-search profile(s) unclaimed.</b> ' + unclaimed.join(', ') + ' — AI search (ChatGPT and the rest) pulls local business info from these. Unclaimed means customers who ask AI never see you.');
+  if (answeredCount === 5 && claimedCount === 5) goods.push('<b>Claimed everywhere AI looks.</b> All five AI-search profiles are claimed — Bing Places, Better Business Bureau, Yelp, Apple Maps, Nextdoor. Customers who ask ChatGPT can actually find you.');
 
   if (!isNaN(years) && years >= 10) goods.push('<b>Established shop.</b> ' + years + ' years in business is real trust — your page just isn\'t showing it yet.');
   if (rating !== '' && rating !== '3.5' && !isNaN(reviews) && reviews >= 20) goods.push('<b>Reputation to build on.</b> A solid rating with real volume — the foundation is there.');
